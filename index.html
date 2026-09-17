@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="Plan road trip fuel stops, range, and stop intervals."/>
+<link rel="icon" href="data:,"/>
+<title>Road Trip Fuel Stop Planner</title>
+</head>
+<body>
+<main class="app-container">
+<header class="app-header">
+<div class="brand">
+<svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 22h12V4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v18z"/><path d="M15 8h2a2 2 0 0 1 2 2v8a2 2 0 0 0 4 0v-8l-3-3"/></svg>
+<h1 class="brand-title">Road Trip Fuel Planner</h1>
+</div>
+<div class="unit-switch" role="group" aria-label="Unit system">
+<button type="button" class="unit-btn" data-unit="metric" aria-pressed="true">Metric</button>
+<button type="button" class="unit-btn" data-unit="imperial" aria-pressed="false">Imperial</button>
+</div>
+</header>
+<div class="layout-grid">
+<section class="panel" aria-labelledby="formTitle">
+<h2 class="form-title" id="formTitle">Trip &amp; Vehicle</h2>
+<div id="loadingState" class="loading-state" role="status" aria-live="polite">
+<div class="spinner" aria-hidden="true"></div><p class="state-desc">Preparing calculator…</p>
+</div>
+<div id="errorBanner" class="main-error-banner" role="alert" aria-live="assertive" hidden></div>
+<form class="form-grid" novalidate>
+<div class="field">
+<label class="field-label" for="inputDistance">Total trip distance <span class="field-unit" data-unit-kind="distance">km</span></label>
+<input id="inputDistance" type="number" min="0" step="any" inputmode="decimal" autocomplete="off"/>
+</div>
+<div class="field">
+<label class="field-label" for="inputTank">Tank size <span class="field-unit" data-unit-kind="tank">L</span></label>
+<input id="inputTank" type="number" min="0" step="any" inputmode="decimal" autocomplete="off"/>
+</div>
+<div class="field">
+<label class="field-label" for="inputConsumption">Fuel efficiency <span class="field-unit" data-unit-kind="consumption">L/100km</span></label>
+<input id="inputConsumption" type="number" min="0" step="any" inputmode="decimal" autocomplete="off"/>
+</div>
+<div class="field">
+<label class="field-label" for="inputLevel">Current fuel level <span class="field-unit">%</span></label>
+<div class="level-slider-wrap">
+<input id="inputLevel" type="number" min="0" max="100" step="1" inputmode="numeric" autocomplete="off"/>
+<span class="level-badge" id="levelBadge" aria-hidden="true">60%</span>
+</div>
+<input id="inputLevelRange" type="range" min="0" max="100" step="1" aria-label="Current fuel level slider"/>
+</div>
+</form>
+</section>
+<section class="results-column" aria-label="Trip plan results">
+<div id="emptyState" class="empty-state" role="status" hidden>
+<h2 class="state-title">Enter your trip details</h2>
+<p class="state-desc">Fill in distance, tank size, and efficiency. Results refresh automatically.</p>
+<button type="button" class="btn-cta" id="btnEmptyCta">Start with distance</button>
+</div>
+<div id="resultsView" aria-live="polite">
+<div class="stats-grid">
+<div class="stat-card" data-highlight="true"><span class="stat-label">Range on current fuel</span><span class="stat-value"><span id="statCurrentRange">0</span> <span class="stat-unit" id="statCurrentRangeUnit">km</span></span></div>
+<div class="stat-card"><span class="stat-label">Fuel stops needed</span><span class="stat-value"><span id="statStops">0</span></span></div>
+<div class="stat-card"><span class="stat-label">Stop every</span><span class="stat-value"><span id="statInterval">0</span> <span class="stat-unit" id="statIntervalUnit">km</span></span></div>
+</div>
+<div class="visual-section"><h2 class="section-title">Trip legs</h2><div class="progress-track" id="progressTrack" role="img" aria-label="Trip legs between fuel stops"></div></div>
+</div>
+</section>
+</div>
+</main>
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>
