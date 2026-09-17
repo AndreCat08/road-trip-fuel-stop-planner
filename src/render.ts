@@ -69,7 +69,7 @@ export function render(dom: DomElements, state: AppState): void {
   dom.errorBanner.textContent = messages.join(' ');
 
   for (const [key, input] of Object.entries(dom.inputs)) {
-    if (key in res.errors) input.setAttribute('aria-invalid', String(Boolean(res.errors[key as keyof typeof res.errors])));
+    input.setAttribute('aria-invalid', String(Boolean(res.errors[key as keyof typeof res.errors])));
   }
   dom.levelBadge.textContent = `${state.raw.level}%`;
 
